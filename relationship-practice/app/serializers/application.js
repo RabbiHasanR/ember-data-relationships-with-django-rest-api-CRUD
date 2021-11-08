@@ -55,3 +55,36 @@ export default DS.RESTSerializer.extend({
     return json;
   },
 });
+
+
+// import RESTSerializer from '@ember-data/serializer/rest';
+
+
+// export default class ContactSerializer extends RESTSerializer {
+//     normalizeResponse(store, primaryModelClass, payload, id,
+//     requestType) {
+//         let newPayload = {};
+//         newPayload[primaryModelClass.modelName] = payload;
+//         let json = super.normalizeResponse(
+//             store,
+//             primaryModelClass,
+//             newPayload,
+//             id,
+//             requestType
+//             );
+//         console.log('debug-json', JSON.stringify(json));
+//         return json;
+//     }
+
+
+//       // remove-model-name-from-ember-data-json
+//         serializeIntoHash(hash, type, record, options) {
+//             Ember.assign(hash, this.serialize(record, options));
+//         }
+
+//         // put, save
+//         serialize(snapshot, options) {
+//             let json = this._super(...arguments);
+//             return json;
+//         }
+// }

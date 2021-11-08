@@ -41,7 +41,9 @@ export default class ProductsController extends Controller {
             tag.save().then(()=>{
                 this.product.save();
             });
-        })
+        });
+        // this.product = this.store.createRecord('product');
+        this.tags = [{}]
         this.isEdit = false;
       
     } else{
@@ -64,7 +66,6 @@ export default class ProductsController extends Controller {
   productEdit(product) {
     this.isEdit = true;
     this.product = this.store.peekRecord('product', product.id);
-    // this.tags = this.store.peekAll('products/tag');
   }
 
   @action
