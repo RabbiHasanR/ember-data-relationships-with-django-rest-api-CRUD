@@ -1,0 +1,78 @@
+{{page-title 'Products'}}
+
+<div class='row'>
+  <div class='col-6'>
+      {{log 'products:' this.products}}
+    {{#if this.products}}
+      {{#each this.products as |product|}}
+      {{#if product.id}}
+        <div class='card'>
+          <div class='card-body'>
+            <h5 class='card-title'>{{product.name}}</h5>
+            <p class='card-text'>{{product.description}}</p>
+            {{#if product.tags}}
+            {{#each product.tags as |tag|}}
+              <span class='badge badge-primary'>{{tag.name}}</span>
+            {{/each}}
+            {{/if}}
+            <button class="btn btn-sm btn-warning" type="button" {{action 'productEdit' product}}>Edit</button>
+            <button class="btn btn-sm btn-danger" type="button" {{action 'productDelete' product}}>Delete</button>
+          </div>
+        </div>
+        {{/if}}
+      {{/each}}
+    {{/if}}
+  </div>
+
+  <div class='col-6'>
+    <h1>Create Product</h1>
+    <form {{action 'saveProduct' on='submit'}}>
+      <div class='form-group'>
+        <label for='name'>Name</label>
+        <Input
+          @type='text'
+          @value={{this.product.name}}
+          class='form-control'
+          id='name'
+          placeholder='Enter name'
+        />
+      </div>
+      <div class='form-group'>
+        <label for='description'>Description</label>
+        <Input
+          @type='text'
+          @value={{this.product.description}}
+          class='form-control'
+          id='description'
+          placeholder='Enter description'
+        />
+      </div>
+      <h4>Tags</h4>
+    <button {{action 'addTag'}} class="btn btn-sm btn-primary" type="submit">+AddNewTag</button>
+      {{#if this.tags}}
+      {{#each this.tags as |tag|}}
+      <div class='form-group row'>
+        <label
+          for='inputTag'
+          class='col-sm-2 col-form-label'
+        >Tag Name</label>
+        <div class='col-sm-6'>
+          <Input
+            @type='text'
+            @value={{tag.name}}
+            class='form-control'
+            id='inputTag'
+            placeholder='Tag'
+          />
+        </div>
+        <div class="col-sm-2">
+            <button {{action 'removeTag' tag}} class="btn btn-sm btn-danger" type="submit">Remove</button>
+        </div>
+      </div>
+      {{/each}}
+      {{/if}}
+     <button type='submit' class='mt-2 btn btn-primary'>Submit</button>
+    </form>
+  </div>
+</div>
+{{outlet}}
