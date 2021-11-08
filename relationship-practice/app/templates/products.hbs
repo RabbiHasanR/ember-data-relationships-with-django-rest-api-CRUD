@@ -25,7 +25,7 @@
   </div>
 
   <div class='col-6'>
-    <h1>Create Product</h1>
+    <h1>{{if this.isEdit 'Edit Product' 'Create Product'}}</h1>
     <form {{action 'saveProduct' on='submit'}}>
       <div class='form-group'>
         <label for='name'>Name</label>
@@ -49,6 +49,30 @@
       </div>
       <h4>Tags</h4>
     <button {{action 'addTag'}} class="btn btn-sm btn-primary" type="submit">+AddNewTag</button>
+    {{#if this.isEdit}}
+    {{#if this.product.tags}}
+      {{#each this.product.tags as |tag|}}
+      <div class='form-group row'>
+        <label
+          for='inputTag'
+          class='col-sm-2 col-form-label'
+        >Tag Name</label>
+        <div class='col-sm-6'>
+          <Input
+            @type='text'
+            @value={{tag.name}}
+            class='form-control'
+            id='inputTag'
+            placeholder='Tag'
+          />
+        </div>
+        <div class="col-sm-2">
+            <button {{action 'removeTag' tag}} class="btn btn-sm btn-danger" type="submit">Remove</button>
+        </div>
+      </div>
+      {{/each}}
+      {{/if}}
+    {{else}}
       {{#if this.tags}}
       {{#each this.tags as |tag|}}
       <div class='form-group row'>
@@ -71,7 +95,8 @@
       </div>
       {{/each}}
       {{/if}}
-     <button type='submit' class='mt-2 btn btn-primary'>Submit</button>
+    {{/if}}
+     <button type='submit' class='mt-2 btn btn-primary'>{{if this.isEdit 'Update' 'Save'}}</button>
     </form>
   </div>
 </div>
